@@ -105,7 +105,8 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isAuthenticated = true;
-        state.user = action.payload.user; // assuming response contains user data
+        state.user = action.payload.user;
+
         if (typeof window !== "undefined") {
           localStorage.setItem("authState", JSON.stringify(state));
         }

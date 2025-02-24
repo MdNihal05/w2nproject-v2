@@ -18,17 +18,20 @@ import {
 } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import type { AppDispatch } from "@/lib/store/store";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   const { toast } = useToast();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await dispatch(loginUser({ email, password })).unwrap();
+      router.replace("/dashboard");
       toast({
         title: "Success",
         description: "Logged in successfully",
